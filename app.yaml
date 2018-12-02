@@ -1,0 +1,17 @@
+application: lcc-estates
+version: 1
+runtime: python
+api_version: 1
+env: flex
+entrypoint: gunicorn -b :$PORT main:app
+
+runtime_config:
+  python_version: 2
+
+handlers:
+- url: /(.*\.(gif|png|jpg|ico|js|css|swf|xml|flo|page|lss|mp3|trsl|story|mp4|pdf))
+  static_files: \1
+  upload: (.*\.(gif|png|jpg|ico|js|css|swf|xml|flo|page|lss|mp3|trsl|story|mp4|pdf))
+
+- url: .*
+  script: main.py
